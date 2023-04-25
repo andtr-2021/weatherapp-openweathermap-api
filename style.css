@@ -1,0 +1,239 @@
+body {
+    height: 100%;
+    font-family: monospace;
+    margin: 0;
+    padding: 0;
+    
+  }
+  
+  header {
+    border: 1px solid black;
+    background-color: #2196F3;
+    color: white;
+    font-size: 20px;
+    margin: 0px;
+    text-align: center;
+  }
+
+  
+  main {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+  }
+
+  .searchbar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #00bfff;
+    height: 100%;
+    padding: 20px;
+    background-color: #f2f2f2;
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+
+  .searchbar input {
+    width: 400px;
+    height: 30px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px;
+  }
+
+  .searchbar button {
+    width: 80px;
+    height: 43px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: #2196F3;
+    color: white;
+    margin-top: 10px;
+  }
+  
+  .weather {
+    display: flex;
+    flex-direction: row;    
+    border: 1px solid white;
+  }
+
+  .weatherdata {
+    border: 1px solid #00bfff;
+    height: 389px;
+    width: 360px;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    padding-left: 50px;
+    background-color: #f2f2f2;
+  }
+
+  .weatherdata city {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .weatherdata temp {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .weatherdata description {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .weatherdata other {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .map {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #00bfff;
+    margin-left: 10px;
+    height: 389px;
+    width: 100%;
+    padding-left: 10px;
+    padding-top: 10px;
+    background-color: #f2f2f2;
+  }
+
+  #map {
+    height: 352px;
+    width: 100%;
+  }
+
+  .dailyforecast {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #00bfff;
+    margin-top: 10px;
+    padding-left: 50px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    background-color: #f2f2f2;
+  }
+
+  .dailyforecastdata {
+    display: flex;
+    flex-direction: row;
+    padding-top: 10px;
+  }
+
+  .day1 {
+    border: 1px solid black;
+    font-size: 20px;
+    width: 150px;
+    text-align: center;
+    margin-right: 45px;
+    background-color: #0584e5;
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+  }
+
+  .day2 {
+    border: 1px solid black;
+    font-size: 20px;
+    width: 150px;
+    text-align: center;
+    margin-right: 45px;
+    background-color: #0584e5;
+    border-radius: 5px;
+    color: white;
+  }
+
+  .day3 {
+    border: 1px solid black;
+    font-size: 20px;
+    width: 150px;
+    text-align: center;
+    margin-right: 45px;
+    background-color: #0584e5;
+    border-radius: 5px;
+    color: white;
+  }
+
+  .day4 {
+    border: 1px solid black;
+    font-size: 20px;
+    width: 150px;
+    text-align: center;
+    margin-right: 45px;
+    background-color: #0584e5;
+    border-radius: 5px;
+    color: white;
+  }
+
+  .day5 {
+    border: 1px solid black;
+    font-size: 20px;
+    width: 150px;
+    text-align: center;
+    margin-right: 45px;
+    background-color: #0584e5;
+    border-radius: 5px;
+    color: white;
+  }
+
+  .day6 {
+    border: 1px solid black;
+    font-size: 20px;
+    width: 150px;
+    text-align: center;
+    margin-right: 45px;
+    background-color: #0584e5;
+    border-radius: 5px;
+    color: white;
+  }
+
+  .day7 {
+    border: 1px solid black;
+    font-size: 20px;
+    width: 150px;
+    text-align: center;
+    margin-right: 45px;
+    background-color: #0584e5;
+    border-radius: 5px;
+    color: white;
+  }
+
+  .detailforecast {
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+    margin-top: 25px;
+  }
+
+  .detailforecastdata {
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+  }
+
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+  
+  footer {
+    background-color: #00bfff;
+    padding: 1em;
+    text-align: center;
+  }
+  

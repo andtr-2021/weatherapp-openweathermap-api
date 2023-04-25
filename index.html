@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <p>Weather App</p>
+      </div>
+    </header>
+    <main>
+      <div class="searchbar">
+        <input type="text" id="inputcity" placeholder="Enter only city name" />
+        <button type="button" onclick="getInputCity()">Search</button>
+      </div>
+
+      <div class="weather">
+        <div class="weatherdata">
+          <h2>Current Weather Infor:</h2>
+          <div class="city">
+            <p id="citydatetime"></p>
+            <h2 id="cityname"></h2>
+          </div>
+          <div class="temperature">
+            <p id="temperature"></p>
+          </div>
+          <div class="description">
+            <p id="description"></p>
+          </div>
+          <div class="otherinfor">
+            <p id="humidity"></p>
+            <p id="wind"></p>
+            <p id="dewpoint"></p>
+            <p id="uv"></p>
+            <p id="visibility"></p>
+            <p id="lon"></p>
+            <p id="lat"></p>
+          </div>
+        </div>
+        <div class="map">
+          <div class="citylocation">
+            <h2>Location of City:</h2>
+          </div>
+
+          <!--The div element for the map -->
+          <div id="map"></div>
+
+          <!-- prettier-ignore -->
+          <script>(g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})
+              ({key: "2222", v: "beta"});</script>
+        </div>
+      </div>
+
+      <div class="dailyforecast">
+        <h2>7-Day Weather Forecast:</h2>
+        <div class="dailyforecastdata">
+          <div id="dy1" onclick="showDetailWeatherForcast(0)" class="day1">
+            <p id="day1date"></p>
+            <p id="day1temp"></p>
+            <p id="day1description"></p>
+          </div>
+          <div id="dy2" onclick="showDetailWeatherForcast(1)" class="day2">
+            <p id="day2date"></p>
+            <p id="day2temp"></p>
+            <p id="day2description"></p>
+          </div>
+
+          <div id="dy3" onclick="showDetailWeatherForcast(2)" class="day3">
+            <p id="day3date"></p>
+            <p id="day3temp"></p>
+            <p id="day3description"></p>
+          </div>
+
+          <div id="dy4" onclick="showDetailWeatherForcast(3)" class="day4">
+            <p id="day4date"></p>
+            <p id="day4temp"></p>
+            <p id="day4description"></p>
+          </div>
+
+          <div id="dy5" onclick="showDetailWeatherForcast(4)" class="day5">
+            <p id="day5date"></p>
+            <p id="day5temp"></p>
+            <p id="day5description"></p>
+          </div>
+
+          <div id="dy6" onclick="showDetailWeatherForcast(5)" class="day6">
+            <p id="day6date"></p>
+            <p id="day6temp"></p>
+            <p id="day6description"></p>
+          </div>
+
+          <div id="dy7" onclick="showDetailWeatherForcast(6)" class="day7">
+            <p id="day7date"></p>
+            <p id="day7temp"></p>
+            <p id="day7description"></p>
+          </div>
+        </div>
+
+        <!--Detail Forecast of Each Day-->
+        <div class="detailforecast">
+          <h1>Detailed Weather Forecast:</h1>
+
+          <h3>
+            <span style="color: red">
+              The default date of detail forecast is always the next day of
+              today. Thank you!</span
+            >
+          </h3>
+
+          <h3>
+            <span style="color: red">
+              To see detail weather forecast of a date, just click to the box
+              containing that date. Thank you!</span
+            >
+          </h3>
+
+          <div class="detailforecastdata">
+            <div class="generaldescription">
+              <h2>Weather Summary:</h2>
+              <p id="detaildate"></p>
+              <p id="detaildescription"></p>
+              <p id="detailminmaxtemperature"></p>
+            </div>
+            <div class="detailinfor">
+              <h2>Weather Details:</h2>
+              <p id="detailhumidity"></p>
+              <p id="detailwind"></p>
+              <p id="detaildewpoint"></p>
+              <p id="detailuv"></p>
+              <p id="detailvisibility"></p>
+            </div>
+
+            <table>
+              <h2>Table:</h2>
+              <tr>
+                <td>Blank</td>
+                <td>Morning</td>
+                <td>Afternoon</td>
+                <td>Evening</td>
+                <td>Night</td>
+              </tr>
+
+              <tr>
+                <td>TEMPERATURE</td>
+                <td id="detailmorningtemp"></td>
+                <td id="detailafternoontemp"></td>
+                <td id="detaileveningtemp"></td>
+                <td id="detailnighttemp"></td>
+              </tr>
+
+              <tr>
+                <td>FEEL LIKE</td>
+                <td id="detailmorningfeelslike"></td>
+                <td id="detailafternoonfeelslike"></td>
+                <td id="detaileveningfeelslike"></td>
+                <td id="detailnightfeelslike"></td>
+              </tr>
+            </table>
+
+            <div class="suntime">
+              <h2>Sunrise and Sunset of the city but in your local time:</h2>
+              <p id="detailsunrise"></p>
+              <p id="detailsunset"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <p>copyright: weather app 2023</p>
+    </footer>
+  </body>
+</html>
+
+<script>
+  // Get the weather data div
+  let WeatherData = document.querySelector("#weatherdata");
+  // API key for OpenWeatherMap API
+  const apiKey = "111";
+  // default city
+  var city = "Ho Chi Minh, VN";
+  // default display of website when the users have not search
+  getWeatherData(city);
+
+  // function to get input value then it will change the city information
+  function getInputCity() {
+    var inputcity = document.getElementById("inputcity");
+
+    // Retrieve the value of the input element
+    var city = inputcity.value;
+
+    getWeatherData(city);
+
+    return city;
+  }
+
+  // Function to get weather data from OpenWeatherMap API
+  function getWeatherData(city) {
+    // Check if city name is provided
+    if (city != "") {
+      // Display the input value in the console
+      console.log("The input value is: " + city);
+
+      // API endpoint for getting weather data by city name
+      const url =
+        "https://api.openweathermap.org/data/2.5/weather?q=" +
+        city +
+        "&appid=0e3d21c28cff5eee6cd570d04bbc830e&units=metric";
+
+      // Fetch data from API
+      fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+          // Call function to display weather data
+          displayWeatherData(data);
+        })
+        .catch((error) => {
+          // Display error message if API call fails
+          console.log(error);
+          WeatherData.innerHTML = `<p>Failed to get weather data. Please try again later.</p>`;
+        });
+    }
+  }
+
+  // Function to display weather data on the page
+  function displayWeatherData(data) {
+    // Extract relevant data from API response
+    const date = new Date(data.dt * 1000);
+    const city = data.name;
+    const country = data.sys.country;
+    const temp = Math.round(data.main.temp);
+    const description = data.weather[0].description;
+    const humidity = data.main.humidity;
+    const wind = data.wind.speed;
+    const dewpoint = data.main.feels_like;
+    const uv = data.main.temp_max;
+    const visibility = data.visibility;
+    const lon = data.coord.lon;
+    const lat = data.coord.lat;
+
+    // Display the data in the console
+    document.getElementById("citydatetime").innerHTML =
+      date.toLocaleDateString() + " " + date.toLocaleTimeString();
+    document.getElementById("cityname").innerHTML = city + ", " + country;
+    document.getElementById("temperature").innerHTML =
+      "Temperature: " + temp + "°C";
+    document.getElementById("description").innerHTML =
+      "Description: " + description;
+    document.getElementById("humidity").innerHTML =
+      "Humidity: " + humidity + "%";
+    document.getElementById("wind").innerHTML = "Wind: " + wind + "m/s";
+    document.getElementById("dewpoint").innerHTML =
+      "Dewpoint: " + dewpoint + "°C";
+    document.getElementById("uv").innerHTML = "UV: " + uv;
+    document.getElementById("visibility").innerHTML =
+      "Visibility: " + visibility + "m";
+
+    let map;
+    initMap(lat, lon);
+    getForcastData(lon, lat);
+  }
+
+  async function initMap(latitude, longtitude) {
+    // The location of Uluru
+    const position = { lat: latitude, lng: longtitude };
+    // Request needed libraries.
+    //@ts-ignore
+    const { Map } = await google.maps.importLibrary("maps");
+    const { AdvancedMarkerView } = await google.maps.importLibrary("marker");
+
+    // The map, centered at Uluru
+    map = new Map(document.getElementById("map"), {
+      zoom: 4,
+      center: position,
+      mapId: "DEMO_MAP_ID",
+    });
+
+    // The marker, positioned at Uluru
+    const marker = new AdvancedMarkerView({
+      map: map,
+      position: position,
+      title: "Uluru",
+    });
+  }
+
+  var dataForecast;
+
+  function getForcastData(longtitude, latitude) {
+    // API endpoint for getting weather data by city name
+    const url =
+      "https://api.openweathermap.org/data/2.5/onecall?lat=" +
+      latitude +
+      "&lon=" +
+      longtitude +
+      "&exclude=current,minutely,hourly,alerts&appid=" +
+      apiKey +
+      "&units=metric";
+
+    // Fetch data from API
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        // Call function to display weather data
+        displayForcastData(data);
+        dataForecast = data;
+        showDefaltDetailWeatherForcast(data);
+      })
+      .catch((error) => {
+        // Display error message if API call fails
+        console.log(error);
+        WeatherData.innerHTML = `<p>Failed to get weather data. Please try again later.</p>`;
+      });
+  }
+
+  function displayForcastData(data) {
+    // Extract relevant data from API response
+    const daily = data.daily;
+    // data of day 1
+    const day1date = new Date(daily[0].dt * 1000);
+    const day1temp = Math.round(daily[0].temp.day);
+    const day1description = daily[0].weather[0].description;
+    // data of day 2
+    const day2date = new Date(daily[1].dt * 1000);
+    const day2temp = Math.round(daily[1].temp.day);
+    const day2description = daily[1].weather[0].description;
+    // data of day 3
+    const day3date = new Date(daily[2].dt * 1000);
+    const day3temp = Math.round(daily[2].temp.day);
+    const day3description = daily[2].weather[0].description;
+    // data of day 4
+    const day4date = new Date(daily[3].dt * 1000);
+    const day4temp = Math.round(daily[3].temp.day);
+    const day4description = daily[3].weather[0].description;
+    // data of day 5
+    const day5date = new Date(daily[4].dt * 1000);
+    const day5temp = Math.round(daily[4].temp.day);
+    const day5description = daily[4].weather[0].description;
+    // data of day 6
+    const day6date = new Date(daily[5].dt * 1000);
+    const day6temp = Math.round(daily[5].temp.day);
+    const day6description = daily[5].weather[0].description;
+    // data of day 7
+    const day7date = new Date(daily[6].dt * 1000);
+    const day7temp = Math.round(daily[6].temp.day);
+    const day7description = daily[6].weather[0].description;
+
+    document.getElementById("day1date").innerHTML =
+      day1date.toLocaleDateString();
+    document.getElementById("day1temp").innerHTML = day1temp + "°C";
+    document.getElementById("day1description").innerHTML = day1description;
+    document.getElementById("day2date").innerHTML =
+      day2date.toLocaleDateString();
+    document.getElementById("day2temp").innerHTML = day2temp + "°C";
+    document.getElementById("day2description").innerHTML = day2description;
+    document.getElementById("day3date").innerHTML =
+      day3date.toLocaleDateString();
+    document.getElementById("day3temp").innerHTML = day3temp + "°C";
+    document.getElementById("day3description").innerHTML = day3description;
+    document.getElementById("day4date").innerHTML =
+      day4date.toLocaleDateString();
+    document.getElementById("day4temp").innerHTML = day4temp + "°C";
+    document.getElementById("day4description").innerHTML = day4description;
+    document.getElementById("day5date").innerHTML =
+      day5date.toLocaleDateString();
+    document.getElementById("day5temp").innerHTML = day5temp + "°C";
+    document.getElementById("day5description").innerHTML = day5description;
+    document.getElementById("day6date").innerHTML =
+      day6date.toLocaleDateString();
+    document.getElementById("day6temp").innerHTML = day6temp + "°C";
+    document.getElementById("day6description").innerHTML = day6description;
+    document.getElementById("day7date").innerHTML =
+      day7date.toLocaleDateString();
+    document.getElementById("day7temp").innerHTML = day7temp + "°C";
+    document.getElementById("day7description").innerHTML = day7description;
+  }
+
+  // if a user clicks on the one of the boxes of 7 days forcast, it will show the detail weather data of that day
+  function showDefaltDetailWeatherForcast(data) {
+    const daily = data.daily;
+    const daydate = new Date(daily[1].dt * 1000);
+
+    // detail weather forecast data of day 1
+    const description = daily[1].weather[0].description;
+    const mintemp = Math.round(daily[1].temp.min);
+    const maxtemp = Math.round(daily[1].temp.max);
+    // others forecast data
+    const detailhumidity = daily[1].humidity;
+    const detailwind = daily[1].wind_speed;
+    const detailuvi = daily[1].uvi;
+    const detailvisibility = daily[1].visibility;
+    const detaildewpoint = daily[1].dew_point;
+    // table data
+    const detailtemperaturemorning = Math.round(daily[1].temp.morn);
+    const detailtemperatureafternoon = Math.round(daily[1].temp.day);
+    const detailtemperatureevening = Math.round(daily[1].temp.eve);
+    const detailtemperaturenight = Math.round(daily[1].temp.night);
+    const detailfeelslikemorning = Math.round(daily[1].feels_like.morn);
+    const detailfeelslikeafternoon = Math.round(daily[1].feels_like.day);
+    const detailfeelslikeevening = Math.round(daily[1].feels_like.eve);
+    const detailfeelslikenight = Math.round(daily[1].feels_like.night);
+    // sun time
+    const detailsunrise = new Date(daily[1].sunrise * 1000);
+    const detailsunset = new Date(daily[1].sunset * 1000);
+
+    document.getElementById("detaildate").innerHTML =
+      "Date: " + daydate.toLocaleDateString();
+    document.getElementById("detaildescription").innerHTML =
+      "Description: " + description;
+    document.getElementById("detailminmaxtemperature").innerHTML =
+      "The high will be " + maxtemp + "°C, the low will be " + mintemp + "°C.";
+    document.getElementById("detailhumidity").innerHTML =
+      "Huminity: " + detailhumidity + "%";
+    document.getElementById("detailwind").innerHTML =
+      "Wind Speed: " + detailwind + "m/s";
+    document.getElementById("detailuv").innerHTML = "UVI: " + detailuvi + "/10";
+    document.getElementById("detaildewpoint").innerHTML =
+      "Dew Point: " + detaildewpoint + "°C";
+
+    document.getElementById("detailmorningtemp").innerHTML =
+      detailtemperaturemorning + "°C";
+    document.getElementById("detailafternoontemp").innerHTML =
+      detailtemperatureafternoon + "°C";
+    document.getElementById("detaileveningtemp").innerHTML =
+      detailtemperatureevening + "°C";
+    document.getElementById("detailnighttemp").innerHTML =
+      detailtemperaturenight + "°C";
+    document.getElementById("detailmorningfeelslike").innerHTML =
+      detailfeelslikemorning + "°C";
+    document.getElementById("detailafternoonfeelslike").innerHTML =
+      detailfeelslikeafternoon + "°C";
+    document.getElementById("detaileveningfeelslike").innerHTML =
+      detailfeelslikeevening + "°C";
+    document.getElementById("detailnightfeelslike").innerHTML =
+      detailfeelslikenight + "°C";
+
+    document.getElementById("detailsunrise").innerHTML =
+      detailsunrise.getHours() + ":" + detailsunrise.getMinutes() + "am";
+    document.getElementById("detailsunset").innerHTML =
+      detailsunset.getHours() + ":" + detailsunset.getMinutes() + "pm";
+  }
+
+  function showDetailWeatherForcast(number) {
+    const daily = dataForecast.daily;
+    // detail weather forecast data of day 1
+    const daydate = new Date(daily[number].dt * 1000);
+    const description = daily[number].weather[0].description;
+    const mintemp = Math.round(daily[number].temp.min);
+    const maxtemp = Math.round(daily[number].temp.max);
+    // others forecast data
+    const detailhumidity = daily[number].humidity;
+    const detailwind = daily[number].wind_speed;
+    const detailuvi = daily[number].uvi;
+    const detailvisibility = daily[number].visibility;
+    const detaildewpoint = daily[number].dew_point;
+    // table data
+    const detailtemperaturemorning = Math.round(daily[number].temp.morn);
+    const detailtemperatureafternoon = Math.round(daily[number].temp.day);
+    const detailtemperatureevening = Math.round(daily[number].temp.eve);
+    const detailtemperaturenight = Math.round(daily[number].temp.night);
+    const detailfeelslikemorning = Math.round(daily[number].feels_like.morn);
+    const detailfeelslikeafternoon = Math.round(daily[number].feels_like.day);
+    const detailfeelslikeevening = Math.round(daily[number].feels_like.eve);
+    const detailfeelslikenight = Math.round(daily[number].feels_like.night);
+    // sun time
+    const detailsunrise = new Date(daily[number].sunrise * 1000);
+    const detailsunset = new Date(daily[number].sunset * 1000);
+
+    document.getElementById("detaildate").innerHTML =
+      "Date: " + daydate.toLocaleDateString();
+    document.getElementById("detaildescription").innerHTML =
+      "Description: " + description;
+    document.getElementById("detailminmaxtemperature").innerHTML =
+      "The high will be " + maxtemp + "°C, the low will be " + mintemp + "°C.";
+    document.getElementById("detailhumidity").innerHTML =
+      "Huminity: " + detailhumidity + "%";
+    document.getElementById("detailwind").innerHTML =
+      "Wind Speed: " + detailwind + "m/s";
+    document.getElementById("detailuv").innerHTML = "UVI: " + detailuvi + "/10";
+    document.getElementById("detaildewpoint").innerHTML =
+      "Dew Point: " + detaildewpoint + "°C";
+
+    document.getElementById("detailmorningtemp").innerHTML =
+      detailtemperaturemorning + "°C";
+    document.getElementById("detailafternoontemp").innerHTML =
+      detailtemperatureafternoon + "°C";
+    document.getElementById("detaileveningtemp").innerHTML =
+      detailtemperatureevening + "°C";
+    document.getElementById("detailnighttemp").innerHTML =
+      detailtemperaturenight + "°C";
+    document.getElementById("detailmorningfeelslike").innerHTML =
+      detailfeelslikemorning + "°C";
+    document.getElementById("detailafternoonfeelslike").innerHTML =
+      detailfeelslikeafternoon + "°C";
+    document.getElementById("detaileveningfeelslike").innerHTML =
+      detailfeelslikeevening + "°C";
+    document.getElementById("detailnightfeelslike").innerHTML =
+      detailfeelslikenight + "°C";
+
+    document.getElementById("detailsunrise").innerHTML =
+      detailsunrise.getHours() + ":" + detailsunrise.getMinutes() + "am";
+    document.getElementById("detailsunset").innerHTML =
+      detailsunset.getHours() + ":" + detailsunset.getMinutes() + "pm";
+  }
+</script>
